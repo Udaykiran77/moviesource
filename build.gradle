@@ -1,0 +1,59 @@
+buildscript {
+	ext {
+		springBootVersion = '2.2.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'com-moviesource-springboot'
+    version =  '0.1.0'
+}
+
+group = 'com.moviesource.springboot'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	
+	compileOnly 'org.projectlombok:lombok:1.18.12'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+	
+	testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+	
+	// Spring Boot's web application support
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	
+	// Spring Boot's JPA support
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+
+	// Spring Data REST support
+	implementation('org.springframework.boot:spring-boot-starter-data-rest')
+
+	// PostgresSQL-specific connector for JPA
+	implementation('org.postgresql:postgresql:9.4-1206-jdbc42')
+
+	// Lombok autogenerates things like getters and setters
+	compileOnly('org.projectlombok:lombok')
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('org.springframework.security:spring-security-test')
+	
+}

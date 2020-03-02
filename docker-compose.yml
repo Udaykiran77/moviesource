@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgres:
+    build: postgres/
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+
+  app:
+    image: movie-source:1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/movie-source
+    ports:
+      - "8080:8080"
+volumes:
+  db-data:
